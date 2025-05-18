@@ -1,3 +1,6 @@
+using ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM.Interfaces;
+using ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM.Repositories;
+
 namespace ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM
 {
     public class Program
@@ -8,6 +11,7 @@ namespace ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSingleton<IChatbotService, GeminiRepository>();
 
             var app = builder.Build();
 
