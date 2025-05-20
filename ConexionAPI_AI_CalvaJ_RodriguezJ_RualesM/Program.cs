@@ -11,7 +11,9 @@ namespace ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddSingleton<IChatbotService, GeminiRepository>();
+            builder.Services.AddScoped<GeminiRepository>();
+            builder.Services.AddScoped<GroqRepository>();
+            builder.Services.AddScoped<IChatbotServiceFactory, ChatbotServiceFactory>();
 
             var app = builder.Build();
 

@@ -9,11 +9,12 @@ namespace ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM.Controllers
 {
     public class HomeController : Controller
     {
-        private IChatbotService _chatbotService;
+        private readonly IChatbotServiceFactory _chatbotServiceFactory;
         public static List<Chat> chatHistory = new List<Chat>();
-        public HomeController(IChatbotService chatbotService)
+
+        public HomeController(IChatbotServiceFactory chatbotService)
         {
-            _chatbotService = chatbotService;
+            _chatbotServiceFactory = chatbotService;
         }
 
         public IActionResult Index()
@@ -26,7 +27,9 @@ namespace ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM.Controllers
         {
             if (string.IsNullOrEmpty(promptUser)) return RedirectToAction("Index");
 
-            string response = await _chatbotService.GetChatbotResponseAsync(promptUser);
+            var chatbotService = _chatbotServiceFactory.GetService(provider);
+
+            string response = await chatbotService.GetChatbotResponseAsync(promptUser); 
             string htmlResponse = Markdown.ToHtml(response);
 
             chatHistory.Add(new Chat { Provider = provider, UserPrompt = promptUser, BotResponse = htmlResponse });
