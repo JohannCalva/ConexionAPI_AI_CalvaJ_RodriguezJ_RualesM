@@ -1,21 +1,21 @@
-using ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM.Data;
 using ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM.Models;
+using ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM.Repositories
 {
     public class ChatRepository
     {
-        private readonly ApplicationDbContext _context;
+        private readonly SQLServerContext _context;
 
-        public ChatRepository(ApplicationDbContext context)
+        public ChatRepository(SQLServerContext context)
         {
             _context = context;
         }
 
         public async Task<List<Chat>> GetAllChatsAsync()
         {
-            return await _context.Chats.OrderByDescending(c => c.CreatedAt).ToListAsync();
+            return await _context.Chats.OrderByDescending(c => c.CreatedAT).ToListAsync();
         }
 
         public async Task<Chat> GetChatByIdAsync(int id)
@@ -44,7 +44,7 @@ namespace ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM.Repositories
         {
             return await _context.Chats
                 .Where(c => c.Provider == provider)
-                .OrderByDescending(c => c.CreatedAt)
+                .OrderByDescending(c => c.CreatedAT)
                 .ToListAsync();
         }
     }

@@ -12,9 +12,9 @@ namespace ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM
             var builder = WebApplication.CreateBuilder(args);
 
             
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            builder.Services.AddDbContext<SQLServerContext>(options =>
                 options.UseSqlServer(
-                    builder.Configuration.GetConnectionString("DefaultConnection")));
+                    builder.Configuration.GetConnectionString("SQLServerContextJJM")));
             
             builder.Services.AddControllersWithViews();
             builder.Services.AddScoped<GeminiRepository>();
@@ -29,7 +29,7 @@ namespace ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM
             {
                 using (var scope = app.Services.CreateScope())
                 {
-                    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                    var dbContext = scope.ServiceProvider.GetRequiredService<SQLServerContext>();
                     dbContext.Database.Migrate();
                 }
             }

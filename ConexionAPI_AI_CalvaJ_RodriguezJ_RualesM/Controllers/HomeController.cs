@@ -43,7 +43,7 @@ namespace ConexionAPI_AI_CalvaJ_RodriguezJ_RualesM.Controllers
                 Provider = provider, 
                 UserPrompt = promptUser, 
                 BotResponse = htmlResponse,
-                CreatedAt = DateTime.Now
+                CreatedAT = DateTime.Now
             };
             
             await _chatRepository.AddChatAsync(chat);
